@@ -38,7 +38,27 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let Arr = [];
+  
+  for (let i = 0; i < expr.length / 10; i++) {
+  Arr.push(expr.slice(i*10,i*10+10).replace(/^0{0,}/g,''));
+  }
+  
+  let stringArr = [];
+  for (let i = 0; i < Arr.length; i++) {
+      stringArr.push(Arr[i].replace(/10/g, '.').replace(/11/g, '-').replace(/[*{10,10}]/g, ' '));
+    
+  };
+
+    let word = [];
+    stringArr.forEach(morse => {
+         word.push(MORSE_TABLE[morse]) ;
+      if (morse == '          ') {
+        word.push(' ') ;
+      }
+    });
+
+    return word.join('');
 }
 
 module.exports = {
